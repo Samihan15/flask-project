@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th {
+            background-color: rgb(173, 180, 196);
+            color: white;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 1px solid black;
+            width: 90%;
+            height: 170px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border: 1px solid black;
+            padding: 10px;
+            gap: 10px;
+            width: 60%;
+        }
+
+        .table-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            width: 100%;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #04AA6D;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+
+        <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./admin.html" class="active">Admin Page</a></li>
+            <li><a href="./result.html">Result Page</a></li>
+            <li><a href="./addResult.html">Add Result</a></li>
+        </ul>
+
+        <div class="box">
+            <div class="table-container">
+
+                <table>
+                    <tr>
+                        <th>Student's name</th>
+                        <th>CGPA</th>
+                        <th>Backlog Subject</th>
+                        <th>Result</th>
+                    </tr>
+                    <tr>
+                        <td>Samihan Nandedkar</td>
+                        <td>10</td>
+                        <td>Maths</td>
+                        <td>Pass</td>
+                    </tr>
+                    <tr>
+                        <td>Samihan Nandedkar</td>
+                        <td>10</td>
+                        <td>Maths</td>
+                        <td>Pass</td>
+                    </tr>
+                    <tr>
+                        <td>Samihan Nandedkar</td>
+                        <td>10</td>
+                        <td>Maths</td>
+                        <td>Pass</td>
+                    </tr>
+                    <tr>
+                        <td>Samihan Nandedkar</td>
+                        <td>10</td>
+                        <td>Maths</td>
+                        <td>Pass</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

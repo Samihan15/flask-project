@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Result</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        
+        .box{
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border: 1px solid black;
+            padding: 10px;
+            gap: 10px;
+        }
+
+        form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-container{
+            display: flex;
+            justify-content: center;
+        }
+
+        #submit-btn{
+            padding: 5px 40px;
+            border-radius: 5px;
+            border: none;
+            background-color: rgb(109, 109, 159);
+            color: white;
+        }
+
+        #roll,#name{
+            padding: 5px 40px;
+            border: none;
+            background-color: rgb(243, 240, 240);
+        }
+
+        #ds,#os,#ml{
+            padding: 5px 20px;
+            border: none;
+            background-color: rgb(243, 240, 240);
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #04AA6D;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./admin.html">Admin Page</a></li>
+            <li><a href="./result.html">Result Page</a></li>
+            <li><a href="./addResult.html" class="active">Add Result</a></li>
+        </ul>
+
+        <div class="box">
+            <form action="">
+                <div>
+                    <input type="text" placeholder="Enter Candidate's Name" id="name">
+                    <input type="number" placeholder="Enter Roll Number" id="roll">
+                </div>
+                <div>
+                    <label for="ds">Enter score of DS</label>
+                    <input type="number" id="ds">
+                </div>
+                <div>
+                    <label for="os">Enter score of OS</label>
+                    <input type="number" id="os">
+                </div>
+                <div>
+                    <label for="ml">Enter score of ML</label>
+                    <input type="number" id="ml">
+                </div>
+                <div class="btn-container">
+                    <button type="submit" id="submit-btn">Add</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.getElementById('submit-btn').addEventListener('click', async function() {
+            const name = document.getElementById('name').value;
+            const roll = document.getElementById('roll').value;
+            const ds = document.getElementById('ds').value;
+            const os = document.getElementById('os').value;
+            const ml = document.getElementById('ml').value;
+    
+            const data = {
+                "name": name,
+                "roll": roll,
+                "score": {
+                    "ds": ds,
+                    "os": os,
+                    "ml": ml
+                }
+            };
+
+            console.log(data);
+    
+            await fetch('http://localhost:3000/api/info', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: data
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.msg); 
+            })
+            .catch(error => {
+                console.error('Error:', error); 
+                alert(error); 
+            });
+        });
+    </script>
+    
+    
+</body>
+</html>

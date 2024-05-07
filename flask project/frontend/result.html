@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th {
+            background-color: rgb(173, 180, 196);
+            color: white;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 1px solid black;
+            width: 90%;
+            height: 170px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border: 1px solid black;
+            padding: 10px;
+            gap: 10px;
+        }
+
+
+        .table-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            width: 100%;
+        }
+
+        #rollnumber {
+            padding: 5px 40px;
+            border: none;
+            background-color: rgb(243, 240, 240);
+        }
+
+
+        #roll-btn {
+            padding: 5px 40px;
+            border-radius: 5px;
+            border: none;
+            background-color: rgb(109, 109, 159);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <div>
+                <h3>Result Page</h3>
+            </div>
+
+            <form action="" class="roll-info">
+                <input type="number" placeholder="Enter your roll number" id="rollnumber">
+                <button type="submit" id="roll-btn">submit</button>
+            </form>
+
+            <div class="student-info">
+                <h4>name : samihan nandedkar</h4>
+                <h4>roll number : 134</h4>
+            </div>
+
+            <div class="table-container">
+
+                <table>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Total Marks</th>
+                        <th>Obtain Marks</th>
+                        <th>Result</th>
+                    </tr>
+                    <tr>
+                        <td>Maths</td>
+                        <td>100</td>
+                        <td>60</td>
+                        <td>Pass</td>
+                    </tr>
+                    <tr>
+                        <td>Maths</td>
+                        <td>100</td>
+                        <td>60</td>
+                        <td>Pass</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
