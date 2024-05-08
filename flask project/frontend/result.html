@@ -87,35 +87,85 @@
             </form>
 
             <div class="student-info">
-                <h4>name : samihan nandedkar</h4>
-                <h4>roll number : 134</h4>
+               
             </div>
 
             <div class="table-container">
-
                 <table>
-                    <tr>
-                        <th>Subject</th>
-                        <th>Total Marks</th>
-                        <th>Obtain Marks</th>
-                        <th>Result</th>
-                    </tr>
-                    <tr>
-                        <td>Maths</td>
-                        <td>100</td>
-                        <td>60</td>
-                        <td>Pass</td>
-                    </tr>
-                    <tr>
-                        <td>Maths</td>
-                        <td>100</td>
-                        <td>60</td>
-                        <td>Pass</td>
-                    </tr>
+
                 </table>
+            </div>
+
+            <div class="cgpa-container">
+                <h4 id="cgpa-value"></h4>
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('.roll-info');
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault();
+                const rollNumber = document.getElementById('rollnumber').value;
+        
+                try {
+                    const response = await fetch(`http://192.168.63.171:3000/api/result?roll=${rollNumber}`,{
+                        method: 'GET',
+                        mode: "cors",
+                    });
+                    const data = await response.json();
+        
+                    if (response.ok) {
+                        const studentInfo = document.querySelector('.student-info');
+                        studentInfo.innerHTML = `
+                            <h4>Name: ${data.name}</h4>
+                            <h4>Roll Number: ${data.roll}</h4>
+                        `;
+        
+                        const tableContainer = document.querySelector('.table-container table');
+                        tableContainer.innerHTML = `
+                            <tr>
+                                <th>Subject</th>
+                                <th>Total Marks</th>
+                                <th>Obtain Marks</th>
+                                <th>Result</th>
+                            </tr>
+                            ${Object.entries(data.score).map(([subject, marks]) => `
+                                <tr>
+                                    <td>${subject}</td>
+                                    <td>100</td>
+                                    <td>${marks}</td>
+                                    <td>${marks >= 50 ? 'Pass' : 'Fail'}</td>
+                                </tr>
+                            `).join('')}
+                        `;
+        
+                        // Calculate and display CGPA
+                        const cgpaContainer = document.querySelector('.cgpa-container');
+                        const cgpaValue = calculateCGPA(data.score);
+                        document.getElementById('cgpa-value').textContent = "CGPA: " + cgpaValue.toFixed(2);
+                    } else {
+                        alert(data.msg || 'Error: Data not found');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Error: Failed to fetch data');
+                }
+            });
+        });
+        
+        // Function to calculate CGPA
+        function calculateCGPA(score) {
+            const totalMarks = Object.values(score).reduce((acc, curr) => acc + parseInt(curr), 0);
+            const totalSubjects = Object.keys(score).length;
+            const averageMarks = totalMarks / totalSubjects;
+            const cgpa = averageMarks / 10; 
+            return cgpa;
+        }
+        
+        
+    </script>
 </body>
 
 </html>

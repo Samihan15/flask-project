@@ -22,7 +22,7 @@
 
         .admin-login{
             display: flex;
-            height: 40vh;
+            height: 45vh;
             border: 1px solid black;
             flex-direction: column;
             padding: 3rem;
@@ -81,25 +81,64 @@
                     <h3>Admin Login</h3>
                 </div>
                 <div class="form-container">
-                    <form action="">
+                    <form id="login-form">
                         <div class="auth">
-                            <input type="email" placeholder="Enter email" id="email">
+                            <input type="email" name="email" placeholder="Enter email" id="email" required>
                         </div>
                         <div class="auth">
-                            <input type="password" placeholder="Enter password" id="password">
+                            <input type="password" name="password" placeholder="Enter password" id="password" required>
                         </div>
                         <div class="button-container">
-                            <button type="submit"><a href="./admin.html" class="btn-link">Login</a></button>
+                            <button type="submit">Login</button>
                         </div>
                     </form>
                 </div>
+    
+                <div id="message"></div>
 
                 <div>
                     <a href="./result.html" class="link">Result page</a>
                 </div>
-            </div>
+            </div>        
         </div>
     </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('login-form');
+            const message = document.getElementById('message');
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                fetch('http://192.168.63.171:3000/', {
+                    method: 'POST',
+                    mode:"cors",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = 'admin.html';
+                    } else {
+                        message.textContent = data.message;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    message.textContent = 'An error occurred. Please try again.';
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
+

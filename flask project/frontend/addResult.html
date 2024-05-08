@@ -150,12 +150,16 @@
 
             console.log(data);
     
-            await fetch('http://localhost:3000/api/info', { 
+            fetch('http://192.168.63.171:3000/api/info', { 
                 method: 'POST',
+                mode:"cors",
                 headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: data
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": '*',
+                    "Access-Control-Allow-Methods": 'PUT, GET, POST, DELETE, OPTIONS',
+                    "Access-Control-Allow-Headers": 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
+                    },
+                body: JSON.stringify(data)
             })
             .then(response => response.json())
             .then(data => {
@@ -164,7 +168,7 @@
             .catch(error => {
                 console.error('Error:', error); 
                 alert(error); 
-            });
+            }); 
         });
     </script>
     
