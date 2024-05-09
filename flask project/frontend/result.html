@@ -110,7 +110,7 @@
                 const rollNumber = document.getElementById('rollnumber').value;
         
                 try {
-                    const response = await fetch(`http://192.168.63.171:3000/api/result?roll=${rollNumber}`,{
+                    const response = await fetch(`http://127.0.0.1:3000/api/result?roll=${rollNumber}`,{
                         method: 'GET',
                         mode: "cors",
                     });
